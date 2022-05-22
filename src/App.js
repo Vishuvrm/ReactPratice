@@ -1,52 +1,82 @@
 // import logo from './logo.svg';
 // import './App.css';
 
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm";
+import {useState} from "react";
+
+let a = "Text Utilities";
+
 function App() {
+
+  const [bg_dark_style, setBgDarkStyle] = useState({
+                                                      color: "black",
+                                                      backgroundColor: "white",
+                                                    });
+  const [bg_text_box, setBgTextBox] = useState(
+                                                {
+                                                  color: "black",
+                                                  backgroundColor: "white",
+                                                });
+
+  const toggleStyle = () => {
+    if(bg_dark_style.color === "white" && bg_dark_style.backgroundColor === "black")
+    {
+      setBgDarkStyle({
+        color: "black",
+        backgroundColor: "white"
+      })
+    }
+    else{
+      setBgDarkStyle({
+        color: "white",
+        backgroundColor: "black"
+      })
+    }
+
+    if(bg_text_box.color === "black" && bg_text_box.backgroundColor === "white")
+    {
+      setBgTextBox({
+        color: "black",
+        backgroundColor: "grey"
+      })
+    }
+    else{
+      setBgTextBox({
+        color: "black",
+        backgroundColor: "white"
+      })
+    }
+  }
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            TextUtils
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  About
-                </a>
-              </li>
-            </ul>
-          </div>
-          <form class="d-flex" role="search">
+      <div style={bg_dark_style}>
+        <Navbar title={a} />
+        <div className="container my-5">
+          <div className="form-check form-switch my-3">
             <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              onClick={toggleStyle}
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Enable dark mode
+            </label>
+          </div>
+          <TextForm
+            header="Enter the text to analyze..."
+            bg_text_box={bg_text_box}
+          />
         </div>
-      </nav>
+        <About bg_text_box={bg_text_box} bg_dark_style={bg_dark_style} />
+      </div>
     </>
   );
 }
