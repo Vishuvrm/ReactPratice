@@ -21,7 +21,7 @@ function App() {
                                                 });
 
   const toggleStyle = () => {
-    if(bg_dark_style.color === "white" && bg_dark_style.backgroundColor === "black")
+    if(bg_dark_style.color === "white" && bg_dark_style.backgroundColor === "#082042")
     {
       setBgDarkStyle({
         color: "black",
@@ -31,14 +31,14 @@ function App() {
     else{
       setBgDarkStyle({
         color: "white",
-        backgroundColor: "black"
+        backgroundColor: "#082042"
       })
     }
 
     if(bg_text_box.color === "black" && bg_text_box.backgroundColor === "white")
     {
       setBgTextBox({
-        color: "black",
+        color: "white",
         backgroundColor: "grey"
       })
     }
@@ -53,23 +53,8 @@ function App() {
   return (
     <>
       <div style={bg_dark_style}>
-        <Navbar title={a} />
+        <Navbar title={a} toggleStyle={toggleStyle}/>
         <div className="container my-5">
-          <div className="form-check form-switch my-3">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              onClick={toggleStyle}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="flexSwitchCheckDefault"
-            >
-              Enable dark mode
-            </label>
-          </div>
           <TextForm
             header="Enter the text to analyze..."
             bg_text_box={bg_text_box}

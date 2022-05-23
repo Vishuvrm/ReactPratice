@@ -158,7 +158,7 @@ export default function TextForm(props) {
           </p>
 
           <h3>Preview</h3>
-          <p>{text.slice(0, 200)}....</p>
+          <p>{text.length > 0? `${text.slice(0, 200)}...` : "Your text preview will be shown here"}</p>
         </div>
       </div>
     </>
