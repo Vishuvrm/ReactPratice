@@ -19,6 +19,7 @@ export default function TextForm(props) {
   const reading_per_word = 0.08;
 
   const speak = () => {
+    props.alert("Its speaking now!", "warning")
     let msg = new SpeechSynthesisUtterance();
     msg.text = text;
     window.speechSynthesis.speak(msg);
@@ -26,6 +27,7 @@ export default function TextForm(props) {
 
   const to_upper = () => {
     // console.log("Upper case was clicked!");
+    props.alert("Converted to upper case!", "success")
     set_action("To Upper case");
     var selected = window.getSelection().toString();
     set_selected(selected);
@@ -40,16 +42,20 @@ export default function TextForm(props) {
   };
 
   const copyText = () => {
+    props.alert("Text copied!", "success")
     var element = document.getElementById("floatingTextarea")
     var text = element.value
     navigator.clipboard.writeText(text)
   }
 
   const clearText = () => {
+    props.alert("Text cleared!", "danger")
     setText("")
   }
   
   const to_lower = () => {
+    props.alert("Converted to lower case!", "primary")
+
     set_action("To Lower case");
     var selected = window.getSelection().toString();
     set_selected(selected);
@@ -74,10 +80,14 @@ export default function TextForm(props) {
     // //Sets bold formatting for selected text.
     // documenteditor.selection.characterFormat.bold = true;
     if (bold_button_text === "ToBold") {
+      props.alert("Text bolded!", "primary")
+
       set_text_style("bold");
       set_action("To bold");
       set_bold_text("UnBold");
     } else if (bold_button_text === "UnBold") {
+      props.alert("Text unbolded!", "primary")
+
       set_text_style("");
       set_action("Unbold");
       set_bold_text("ToBold");
