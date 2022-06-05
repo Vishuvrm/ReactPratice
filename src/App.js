@@ -98,6 +98,7 @@ function App() {
       setBgTextBox({
         color: "white",
         backgroundColor: "grey",
+        opacity: 0.7
       });
     } else {
       setColorSchema(null);
@@ -107,18 +108,26 @@ function App() {
       });
     }
 
-    setInterval(() => {
-      document.title = "TextUtils is amazing!";
-    }, 2000);
+    // setInterval(() => {
+    //   document.title = "TextUtils is amazing!";
+    // }, 2000);
 
-    setInterval(() => {
-      document.title = "Download now!";
-    }, 3001);
+    // setInterval(() => {
+    //   document.title = "Download now!";
+    // }, 3001);
   };
 
   return (
     <>
-      <div style={bg_dark_style}>
+      <div
+        style={
+          Object.assign({},
+            {
+              height:"100vh"
+          },
+          bg_dark_style)
+        }
+      >
         <Router>
           <Navbar
             title={a}
@@ -128,7 +137,6 @@ function App() {
           />
           <Alerts alert={alert} />
           <Routes>
-            {/* <div className="container my-5"> */}
             <Route
               exact
               path="/"
@@ -146,7 +154,7 @@ function App() {
               exact
               path="/home"
               element={
-                <div className="container my-5">
+                <div className="container my-5" style={{opacity: 0}}>
                   <TextForm
                     header="Enter the text to analyze..."
                     bg_text_box={bg_text_box}
@@ -158,7 +166,6 @@ function App() {
             {/* </div> */}
 
             <Route
-              exact
               path="/about"
               element={
                 <About

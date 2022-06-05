@@ -52,7 +52,7 @@ export default function Navbar(props) {
           </ul>
         </div>
         {/* <form className="d-flex" role="search"> */}
-          {/* <input
+        {/* <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
@@ -61,33 +61,77 @@ export default function Navbar(props) {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button> */}
-          <div className="btn-group px-4 d-flex" id="navbarNav">
-            <button className="btn btn-round" style={{"backgroundColor": "#6f0808"}} onClick={()=>props.setTheme("#6f0808")}/>
-            <button className="btn btn-round" style={{"backgroundColor": "#0a4c86"}} onClick={()=>props.setTheme("#0a4c86")}/>
-            <button className="btn btn-round" style={{"backgroundColor":"#a67f09"}} onClick={()=>props.setTheme("#a67f09")}/>
-            <button className="btn btn-round" style={{"backgroundColor": "#056639"}} onClick={()=>props.setTheme("#056639")}/>
-            <button className="btn btn-round" style={{"backgroundColor": "#5f0875"}} onClick={()=>props.setTheme("#5f0875")}/>
-          </div>
-          
-
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              aria-checked
-              id="flexSwitchCheckDefault"
-              onClick={props.toggleStyle}
+        {props.dark && (
+          <div className="px-4 d-flex" id="navbarNav">
+            <div
+              className="rounded mx-1"
+              style={{
+                backgroundColor: "#6f0808",
+                height: "30px",
+                width: "30px",
+                cursor: "pointer",
+              }}
+              onClick={() => props.setTheme("#6f0808")}
             />
-            <label
-              className={`form-check-label text-${
-                props.dark ? "light" : "dark"
-              }`}
-              htmlFor="flexSwitchCheckDefault"
-            >
-              Enable dark mode
-            </label>
+            <div
+              className="rounded mx-1"
+              style={{
+                backgroundColor: "#0a4c86",
+                height: "30px",
+                width: "30px",
+                cursor: "pointer",
+              }}
+              onClick={() => props.setTheme("#0a4c86")}
+            />
+            <div
+              className="rounded mx-1"
+              style={{
+                backgroundColor: "#a67f09",
+                height: "30px",
+                width: "30px",
+                cursor: "pointer",
+              }}
+              onClick={() => props.setTheme("#a67f09")}
+            />
+            <div
+              className="rounded mx-1"
+              style={{
+                backgroundColor: "#056639",
+                height: "30px",
+                width: "30px",
+                cursor: "pointer",
+              }}
+              onClick={() => props.setTheme("#056639")}
+            />
+            <div
+              className="rounded mx-1"
+              style={{
+                backgroundColor: "#5f0875",
+                height: "30px",
+                width: "30px",
+                cursor: "pointer",
+              }}
+              onClick={() => props.setTheme("#5f0875")}
+            />
           </div>
+        )}
+
+        <div className="form-check form-switch">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            aria-checked
+            id="flexSwitchCheckDefault"
+            onClick={props.toggleStyle}
+          />
+          <label
+            className={`form-check-label text-${props.dark ? "light" : "dark"}`}
+            htmlFor="flexSwitchCheckDefault"
+          >
+            Enable dark mode
+          </label>
+        </div>
         {/* </form> */}
       </div>
     </nav>

@@ -19,7 +19,7 @@ export default function TextForm(props) {
   const reading_per_word = 0.08;
 
   const speak = () => {
-    props.alert("Its speaking now!", "warning")
+    props.alert("Its speaking now!", "warning");
     let msg = new SpeechSynthesisUtterance();
     msg.text = text;
     window.speechSynthesis.speak(msg);
@@ -27,7 +27,7 @@ export default function TextForm(props) {
 
   const to_upper = () => {
     // console.log("Upper case was clicked!");
-    props.alert("Converted to upper case!", "success")
+    props.alert("Converted to upper case!", "success");
     set_action("To Upper case");
     var selected = window.getSelection().toString();
     set_selected(selected);
@@ -42,19 +42,19 @@ export default function TextForm(props) {
   };
 
   const copyText = () => {
-    props.alert("Text copied!", "success")
-    var element = document.getElementById("floatingTextarea")
-    var text = element.value
-    navigator.clipboard.writeText(text)
-  }
+    props.alert("Text copied!", "success");
+    var element = document.getElementById("floatingTextarea");
+    var text = element.value;
+    navigator.clipboard.writeText(text);
+  };
 
   const clearText = () => {
-    props.alert("Text cleared!", "danger")
-    setText("")
-  }
-  
+    props.alert("Text cleared!", "danger");
+    setText("");
+  };
+
   const to_lower = () => {
-    props.alert("Converted to lower case!", "primary")
+    props.alert("Converted to lower case!", "primary");
 
     set_action("To Lower case");
     var selected = window.getSelection().toString();
@@ -80,13 +80,13 @@ export default function TextForm(props) {
     // //Sets bold formatting for selected text.
     // documenteditor.selection.characterFormat.bold = true;
     if (bold_button_text === "ToBold") {
-      props.alert("Text bolded!", "primary")
+      props.alert("Text bolded!", "primary");
 
       set_text_style("bold");
       set_action("To bold");
       set_bold_text("UnBold");
     } else if (bold_button_text === "UnBold") {
-      props.alert("Text unbolded!", "primary")
+      props.alert("Text unbolded!", "primary");
 
       set_text_style("");
       set_action("Unbold");
@@ -102,34 +102,66 @@ export default function TextForm(props) {
   return (
     <>
       <div>
-        
         <div className="form-floating">
           <textarea
             className="form-control"
             id="floatingTextarea"
-            style={Object.assign({}, text_area_style, styles_biu[text_style], props.bg_text_box)}
+            style={Object.assign(
+              {},
+              text_area_style,
+              styles_biu[text_style],
+              props.bg_text_box
+            )}
             onChange={handle_on_change}
+            // placeholder = {props.header}
             value={text}
           ></textarea>
-          <label htmlFor="floatingTextarea">{props.header}</label>
+          <label
+            htmlFor="floatingTextarea"
+            className="mb-1"
+            style={{ opacity: 0.1 }}
+          >
+            {props.header}
+          </label>
         </div>
         <div className="container">
-          <button className="btn btn-primary my-2" onClick={to_upper}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary my-2"
+            onClick={to_upper}
+          >
             ToUpper
           </button>
-          <button className="btn btn-primary my-2 mx-2" onClick={to_lower}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary my-2 mx-2"
+            onClick={to_lower}
+          >
             ToLower
           </button>
-          <button className="btn btn-primary my-2 mx-1" onClick={to_bold}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary my-2 mx-1"
+            onClick={to_bold}
+          >
             {bold_button_text}
           </button>
-          <button className="btn btn-primary my-2 mx-2" onClick={copyText}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary my-2 mx-2"
+            onClick={copyText}
+          >
             copy
           </button>
-          <button className="btn btn-primary my-2 mx-2" onClick={clearText}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary my-2 mx-2"
+            onClick={clearText}
+          >
             clear
           </button>
           <button
+            disabled={text.length === 0}
             type="submit"
             onClick={speak}
             className="btn btn-warning mx-2 my-2"
@@ -143,32 +175,36 @@ export default function TextForm(props) {
             <u>Your text summary:</u>
           </h3>
           <p>
-            <b>Total characters: </b>
-            {text.length}
+            Your text has <strong>{text.length}</strong> characters and{" "}
+            <strong>
+              {
+                text.split(" ").filter((element) => {
+                  return element !== "";
+                }).length
+              }
+            </strong>{" "}
+            words..
           </p>
           <p>
-            <b>Total words: </b>
-            {text.split(" ").length}
-          </p>
-          <p>
-            <b>Selected text: </b>
-            {selected_text}
-          </p>
-          <p>
-            <b>Count: </b>
-            {selected_text.length}
-          </p>
-          <p>
-            <b>Action: </b>
+            <b>Action on text: </b>
             {action}
           </p>
           <p>
-            <b>Approx reading minutes: </b>
-            {reading_per_word * text.split(" ").length} min
+            <strong>
+              {reading_per_word *
+                text.split(" ").filter((element) => {
+                  return element !== "";
+                }).length}{" "}
+              minutes
+            </strong>{" "}
+            read
           </p>
-
           <h3>Preview</h3>
-          <p>{text.length > 0? `${text.slice(0, 200)}...` : "Your text preview will be shown here"}</p>
+          <p>
+            {text.length > 0
+              ? `${text.slice(0, 200)}...`
+              : "nothing to preview!"}
+          </p>
         </div>
       </div>
     </>
