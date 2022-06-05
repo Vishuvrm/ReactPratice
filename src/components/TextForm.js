@@ -178,7 +178,7 @@ export default function TextForm(props) {
             Your text has <strong>{text.length}</strong> characters and{" "}
             <strong>
               {
-                text.split(" ").filter((element) => {
+                text.split(/\s+|\n/).filter((element) => {
                   return element !== "";
                 }).length
               }
