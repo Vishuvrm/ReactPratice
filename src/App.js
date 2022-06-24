@@ -171,6 +171,7 @@ function App() {
                 <About
                   bg_text_box={bg_text_box}
                   bg_dark_style={bg_dark_style}
+                  dark={dark}
                 />
               }
             />
